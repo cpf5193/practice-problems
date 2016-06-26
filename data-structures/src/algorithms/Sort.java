@@ -22,4 +22,19 @@ public class Sort<T extends Comparable <T>> {
     }
     return array;
   }
+  
+  public T[] insertionSort(T[] arr) {
+    T[] array = arr.clone();
+    for(int i = 0; i < array.length; i++) {
+      int j = i;
+      T item = array[j];
+      while (j > 0 && item.compareTo(array[j - 1]) < 0) {
+        T temp = array[j - 1];
+        array[j - 1] = item;
+        array[j] = temp;
+        j--;
+      }
+    }
+    return array;
+  }
 }
