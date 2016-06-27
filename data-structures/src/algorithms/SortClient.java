@@ -15,17 +15,28 @@ public class SortClient {
     Sort<Integer> intSorter = new Sort<Integer>();
     Function<Integer[], Integer[]> intSelectionSort = (Integer[] arr) -> { return intSorter.selectionSort(arr); };
     Function<Integer[], Integer[]> intInsertionSort = (Integer[] arr) -> { return intSorter.insertionSort(arr); };
+    Function<Integer[], Integer[]> intRecursiveMergeSort = (Integer[] arr) -> { return intSorter.recursiveMergeSort(arr); };
+    Function<Integer[], Integer[]> intIterativeMergeSort = (Integer[] arr) -> { return intSorter.iterativeMergeSort(arr); };
     integerSort(intSelectionSort, shortIntArray, "[-2, 3, 4, 4, 5, 6, 6, 8, 9, 9, 10, 13]", "selection sort", false);
     integerSort(intInsertionSort, shortIntArray, "[-2, 3, 4, 4, 5, 6, 6, 8, 9, 9, 10, 13]", "insertion sort", false);
+    integerSort(intRecursiveMergeSort, shortIntArray, "[-2, 3, 4, 4, 5, 6, 6, 8, 9, 9, 10, 13]", "recursive merge sort", true);
+    integerSort(intIterativeMergeSort, shortIntArray, "[-2, 3, 4, 4, 5, 6, 6, 8, 9, 9, 10, 13]", "iterative merge sort", true);
    
     Sort<String> stringSorter = new Sort<String>();
     Function<String[], String[]> stringSelectionSort = (String[] arr) -> { return stringSorter.selectionSort(arr); };
     Function<String[], String[]> stringInsertionSort = (String[] arr) -> { return stringSorter.insertionSort(arr); };
-    stringSort(stringSelectionSort, stringArray, "[apple, banana, grape, orange, peach, strawberry]", "selection sort", true);
-    stringSort(stringInsertionSort, stringArray, "[apple, banana, grape, orange, peach, strawberry]", "insertion sort", true);
+    Function<String[], String[]> stringRecursiveMergeSort = (String[] arr) -> { return stringSorter.recursiveMergeSort(arr); };
+    Function<String[], String[]> stringIterativeMergeSort = (String[] arr) -> { return stringSorter.iterativeMergeSort(arr); };
+    stringSort(stringSelectionSort, stringArray, "[apple, banana, grape, orange, peach, strawberry]", "selection sort", false);
+    stringSort(stringInsertionSort, stringArray, "[apple, banana, grape, orange, peach, strawberry]", "insertion sort", false);
+    stringSort(stringRecursiveMergeSort, stringArray, "[apple, banana, grape, orange, peach, strawberry]", "recursive merge sort", true);
+    stringSort(stringIterativeMergeSort, stringArray, "[apple, banana, grape, orange, peach, strawberry]", "iterative merge sort", true);
+
     
-    integerSort(intSelectionSort, longIntArray, null, "selection sort", true);
-    integerSort(intInsertionSort, longIntArray, null, "insertion sort", true);
+    integerSort(intSelectionSort, longIntArray, null, "selection sort", false);
+    integerSort(intInsertionSort, longIntArray, null, "insertion sort", false);
+    integerSort(intRecursiveMergeSort, longIntArray, null, "recursive merge sort", false);
+    integerSort(intIterativeMergeSort, longIntArray, null, "iterative merge sort", false);
   }
   
   public static void integerSort(Function<Integer[], Integer[]> sortFunction, Integer[] arrToSort,
