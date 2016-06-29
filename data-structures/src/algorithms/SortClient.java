@@ -9,6 +9,8 @@ public class SortClient {
 
   public static void main(String[] args) throws FileNotFoundException {
     Integer[] shortIntArray = {4, 13, 6, 3, 9, 10, 4, 8, 6, 5, -2, 9};
+    String expectedShortIntString = "[-2, 3, 4, 4, 5, 6, 6, 8, 9, 9, 10, 13]";
+    String expectedSortedStrings = "[apple, banana, grape, orange, peach, strawberry]";
     String[] stringArray = {"orange", "apple", "grape", "banana", "peach", "strawberry"};
     Integer[] longIntArray = getLongIntArray();
     
@@ -17,26 +19,31 @@ public class SortClient {
     Function<Integer[], Integer[]> intInsertionSort = (Integer[] arr) -> { return intSorter.insertionSort(arr); };
     Function<Integer[], Integer[]> intRecursiveMergeSort = (Integer[] arr) -> { return intSorter.recursiveMergeSort(arr); };
     Function<Integer[], Integer[]> intIterativeMergeSort = (Integer[] arr) -> { return intSorter.iterativeMergeSort(arr); };
-    integerSort(intSelectionSort, shortIntArray, "[-2, 3, 4, 4, 5, 6, 6, 8, 9, 9, 10, 13]", "selection sort", false);
-    integerSort(intInsertionSort, shortIntArray, "[-2, 3, 4, 4, 5, 6, 6, 8, 9, 9, 10, 13]", "insertion sort", false);
-    integerSort(intRecursiveMergeSort, shortIntArray, "[-2, 3, 4, 4, 5, 6, 6, 8, 9, 9, 10, 13]", "recursive merge sort", true);
-    integerSort(intIterativeMergeSort, shortIntArray, "[-2, 3, 4, 4, 5, 6, 6, 8, 9, 9, 10, 13]", "iterative merge sort", true);
+    Function<Integer[], Integer[]> intQuickSort = (Integer[] arr) -> { return intSorter.quickSort(arr); };
+    integerSort(intSelectionSort, shortIntArray, expectedShortIntString, "selection sort", false);
+    integerSort(intInsertionSort, shortIntArray, expectedShortIntString, "insertion sort", false);
+    integerSort(intRecursiveMergeSort, shortIntArray, expectedShortIntString, "recursive merge sort", false);
+    integerSort(intIterativeMergeSort, shortIntArray, expectedShortIntString, "iterative merge sort", false);
+    integerSort(intQuickSort, shortIntArray, expectedShortIntString, "quick sort", true);
    
     Sort<String> stringSorter = new Sort<String>();
     Function<String[], String[]> stringSelectionSort = (String[] arr) -> { return stringSorter.selectionSort(arr); };
     Function<String[], String[]> stringInsertionSort = (String[] arr) -> { return stringSorter.insertionSort(arr); };
     Function<String[], String[]> stringRecursiveMergeSort = (String[] arr) -> { return stringSorter.recursiveMergeSort(arr); };
     Function<String[], String[]> stringIterativeMergeSort = (String[] arr) -> { return stringSorter.iterativeMergeSort(arr); };
-    stringSort(stringSelectionSort, stringArray, "[apple, banana, grape, orange, peach, strawberry]", "selection sort", false);
-    stringSort(stringInsertionSort, stringArray, "[apple, banana, grape, orange, peach, strawberry]", "insertion sort", false);
-    stringSort(stringRecursiveMergeSort, stringArray, "[apple, banana, grape, orange, peach, strawberry]", "recursive merge sort", true);
-    stringSort(stringIterativeMergeSort, stringArray, "[apple, banana, grape, orange, peach, strawberry]", "iterative merge sort", true);
+    Function<String[], String[]> stringQuickSort = (String[] arr) -> { return stringSorter.quickSort(arr); };
+    stringSort(stringSelectionSort, stringArray, expectedSortedStrings, "selection sort", false);
+    stringSort(stringInsertionSort, stringArray, expectedSortedStrings, "insertion sort", false);
+    stringSort(stringRecursiveMergeSort, stringArray, expectedSortedStrings, "recursive merge sort", false);
+    stringSort(stringIterativeMergeSort, stringArray, expectedSortedStrings, "iterative merge sort", false);
+    stringSort(stringQuickSort, stringArray, expectedSortedStrings, "quick sort", true);
 
     
     integerSort(intSelectionSort, longIntArray, null, "selection sort", false);
     integerSort(intInsertionSort, longIntArray, null, "insertion sort", false);
     integerSort(intRecursiveMergeSort, longIntArray, null, "recursive merge sort", false);
     integerSort(intIterativeMergeSort, longIntArray, null, "iterative merge sort", false);
+    integerSort(intQuickSort, longIntArray, null, "quick sort", false);
   }
   
   public static void integerSort(Function<Integer[], Integer[]> sortFunction, Integer[] arrToSort,

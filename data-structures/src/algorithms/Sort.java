@@ -1,5 +1,9 @@
 package algorithms;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class Sort<T extends Comparable <T>> {
   
   public T[] selectionSort(T[] arr) {
@@ -91,5 +95,49 @@ public class Sort<T extends Comparable <T>> {
     for (i = lo; i <= hi; i++) {
       arr[i] = aux[i];
     }
+  }
+  
+  public T[] quickSort(T[] arr) {
+    // Shuffle array
+    T[] arrCopy = arr.clone();
+    List<T> list = Arrays.asList(arr);
+    Collections.shuffle(list);
+    arrCopy = list.toArray(arrCopy);
+    
+    quickSortHelper(arr, 0, arr.length - 1);
+    return arr;
+  }
+  
+  private void quickSortHelper(T[] arr, int lo, int hi) {
+    if (hi <= lo) return;
+    int newPartition = partition(arr, lo, hi);
+    quickSortHelper(arr, lo, newPartition - 1);
+    quickSortHelper(arr, newPartition + 1, hi);
+  }
+  
+  private int partition(T[] arr, int lo, int hi) {
+    if (hi <= lo) return lo;
+    T compareVal = arr[lo];
+    int i = lo;
+    int j = hi + 1;
+    
+    while (true) {
+      while (arr[++i].compareTo(compareVal) < 0) {
+        if (i == hi) break;
+      }
+      while (arr[--j].compareTo(compareVal) > 0) {
+        if (j == lo) break;
+      }
+      if (i >= j) break;
+      swap(arr, i, j);
+    }
+     swap(arr, lo, j);
+    return j;
+  }
+  
+  private void swap(T[] arr, int i, int j) {
+    T temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
   }
 }
