@@ -20,11 +20,14 @@ public class SortClient {
     Function<Integer[], Integer[]> intRecursiveMergeSort = (Integer[] arr) -> { return intSorter.recursiveMergeSort(arr); };
     Function<Integer[], Integer[]> intIterativeMergeSort = (Integer[] arr) -> { return intSorter.iterativeMergeSort(arr); };
     Function<Integer[], Integer[]> intQuickSort = (Integer[] arr) -> { return intSorter.quickSort(arr); };
+    Function<Integer[], Integer[]> intTriQuickSort = (Integer[] arr) -> { return intSorter.triPartitionQuickSort(arr); };
+
     integerSort(intSelectionSort, shortIntArray, expectedShortIntString, "selection sort", false);
     integerSort(intInsertionSort, shortIntArray, expectedShortIntString, "insertion sort", false);
     integerSort(intRecursiveMergeSort, shortIntArray, expectedShortIntString, "recursive merge sort", false);
     integerSort(intIterativeMergeSort, shortIntArray, expectedShortIntString, "iterative merge sort", false);
-    integerSort(intQuickSort, shortIntArray, expectedShortIntString, "quick sort", true);
+    integerSort(intQuickSort, shortIntArray, expectedShortIntString, "quick sort", false);
+    integerSort(intTriQuickSort, shortIntArray, expectedShortIntString, "triple partition quick sort", true);
    
     Sort<String> stringSorter = new Sort<String>();
     Function<String[], String[]> stringSelectionSort = (String[] arr) -> { return stringSorter.selectionSort(arr); };
@@ -32,18 +35,21 @@ public class SortClient {
     Function<String[], String[]> stringRecursiveMergeSort = (String[] arr) -> { return stringSorter.recursiveMergeSort(arr); };
     Function<String[], String[]> stringIterativeMergeSort = (String[] arr) -> { return stringSorter.iterativeMergeSort(arr); };
     Function<String[], String[]> stringQuickSort = (String[] arr) -> { return stringSorter.quickSort(arr); };
+    Function<String[], String[]> stringTriQuickSort = (String[] arr) -> { return stringSorter.triPartitionQuickSort(arr); };
+
     stringSort(stringSelectionSort, stringArray, expectedSortedStrings, "selection sort", false);
     stringSort(stringInsertionSort, stringArray, expectedSortedStrings, "insertion sort", false);
     stringSort(stringRecursiveMergeSort, stringArray, expectedSortedStrings, "recursive merge sort", false);
     stringSort(stringIterativeMergeSort, stringArray, expectedSortedStrings, "iterative merge sort", false);
-    stringSort(stringQuickSort, stringArray, expectedSortedStrings, "quick sort", true);
+    stringSort(stringQuickSort, stringArray, expectedSortedStrings, "quick sort", false);
+    stringSort(stringTriQuickSort, stringArray, expectedSortedStrings, "triple partition quick sort", true);
 
-    
     integerSort(intSelectionSort, longIntArray, null, "selection sort", false);
     integerSort(intInsertionSort, longIntArray, null, "insertion sort", false);
     integerSort(intRecursiveMergeSort, longIntArray, null, "recursive merge sort", false);
     integerSort(intIterativeMergeSort, longIntArray, null, "iterative merge sort", false);
     integerSort(intQuickSort, longIntArray, null, "quick sort", false);
+    integerSort(intTriQuickSort, longIntArray, null, "triple partition quick sort", false);
   }
   
   public static void integerSort(Function<Integer[], Integer[]> sortFunction, Integer[] arrToSort,

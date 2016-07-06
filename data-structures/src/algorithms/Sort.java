@@ -135,6 +135,31 @@ public class Sort<T extends Comparable <T>> {
     return j;
   }
   
+  public T[] triPartitionQuickSort(T[] arr) {
+    T[] arrCopy = arr.clone();
+    triPartitionQuickSortHelper(arrCopy, 0, arr.length - 1);
+    return arrCopy;
+  }
+  
+  private void triPartitionQuickSortHelper(T[] arr, int lo, int hi) {
+    if (lo <= hi) return;
+    
+    int lt = lo;
+    int gt = hi;
+    int i = lo + 1;
+    T partitionElt = arr[lo];
+    
+    while (i < gt) {
+      int comparison = arr[i].compareTo(partitionElt);
+      if (comparison < 0) swap(arr, lt++, i++);
+      else if (comparison > 0) swap (arr, i, gt--);
+      else i++;
+    }
+    
+    triPartitionQuickSortHelper(arr, lo, lt - 1);
+    triPartitionQuickSortHelper(arr, gt + 1, hi);
+  }
+  
   private void swap(T[] arr, int i, int j) {
     T temp = arr[i];
     arr[i] = arr[j];
