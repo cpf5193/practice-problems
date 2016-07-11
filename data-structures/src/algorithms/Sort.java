@@ -3,6 +3,7 @@ package algorithms;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import dataStructures.BinaryMaxHeap;
 
 public class Sort<T extends Comparable <T>> {
   
@@ -100,12 +101,12 @@ public class Sort<T extends Comparable <T>> {
   public T[] quickSort(T[] arr) {
     // Shuffle array
     T[] arrCopy = arr.clone();
-    List<T> list = Arrays.asList(arr);
+    List<T> list = Arrays.asList(arrCopy);
     Collections.shuffle(list);
     arrCopy = list.toArray(arrCopy);
     
-    quickSortHelper(arr, 0, arr.length - 1);
-    return arr;
+    quickSortHelper(arrCopy, 0, arrCopy.length - 1);
+    return arrCopy;
   }
   
   private void quickSortHelper(T[] arr, int lo, int hi) {
@@ -164,5 +165,15 @@ public class Sort<T extends Comparable <T>> {
     T temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
+  }
+
+  @SuppressWarnings("unchecked")
+  public T[] heapSort(T[] arr) {
+    BinaryMaxHeap<T> heap = new BinaryMaxHeap<T>(arr);
+    T[] sortedArray = arr.clone();
+    for(int i = arr.length - 1; i >= 0; i--) {
+      sortedArray[i] = heap.removeMax();
+    }
+    return sortedArray;
   }
 }
