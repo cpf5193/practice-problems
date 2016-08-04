@@ -1,5 +1,7 @@
 package algorithms;
 
+import java.util.ArrayList;
+
 import dataStructures.Graph;
 
 public class GraphClient {
@@ -28,6 +30,22 @@ public class GraphClient {
     System.out.println(stringGraph.toString());
     
     // dfs, bfs, dijkstra's
+    ArrayList<Integer> bfsIntPath = intGraph.bfs(3, 8);
+    System.out.println("bfs path from 3 to 8:");
+    System.out.println("expected: [3, 5, 1, 8]");
+    System.out.println("actual: " + bfsIntPath.toString());
+    ArrayList<String> bfsStringPath = stringGraph.bfs("grape", "banana");
+    System.out.println("bfs path from grape to banana: ");
+    System.out.println("expected: [grape, apple, banana]");
+    System.out.println("actual: " + bfsStringPath.toString());
+    
+    ArrayList<Integer> dfsIntPath = intGraph.dfs(3, 8);
+    System.out.println("bfs path from 3 to 8:");
+    System.out.println("expected: [3, 5, 1, 8] or [3, 5, 4, 1, 8]");
+    System.out.println("actual: " + dfsIntPath.toString());
+    ArrayList<String> dfsStringPath = stringGraph.dfs("grape", "banana");
+    System.out.println("dfs path from grape to banana: ");
+    System.out.println("expected: [grape, apple, banana]");
+    System.out.println("actual: " + dfsStringPath.toString());
   }
-
 }

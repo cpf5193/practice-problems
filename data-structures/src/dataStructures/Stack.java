@@ -5,11 +5,11 @@ public class Stack<T> implements Iterable<T> {
   private LinkedListNode<T> head;
   private int size;
   
-  public Stack (T[] arr) {
+  public Stack () {
     this.head = null;
     this.size = 0;
   }
-  
+
   public void push(T item) {
     this.head = new LinkedListNode<T>(item, this.head);
     this.size++;

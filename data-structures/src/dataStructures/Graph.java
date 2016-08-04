@@ -3,6 +3,8 @@ package dataStructures;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Graph<T> {
   
@@ -39,6 +41,10 @@ public class Graph<T> {
       }
     }
     
+  }
+  
+  private boolean containsNode(T val) {
+    return edges.keySet().contains(val);
   }
   
   public void addNode(T value) throws IllegalArgumentException {
@@ -82,11 +88,72 @@ public class Graph<T> {
     return toReturn.toString();
   }
   
-  public T bfs(T searchVal) {
-    return null;
+  // Return nodes searched before path from startNode to searchVal was found
+  public ArrayList<T> bfs(T startNode, T searchVal) throws IllegalArgumentException {
+    if (!containsNode(searchVal)) {
+      throw new IllegalArgumentException("Cannot use bfs to search for a non-existent key");
+    }
+    HashMap<T, T> edgeTo = new HashMap<T, T>();
+    Queue<T> q = new LinkedList<T>();
+    q.add(startNode);
+    T current = null;
+    while(!q.isEmpty()) {
+      current = q.remove();
+      if (current.equals(searchVal)) {
+        break;
+      }
+      for (Edge<T> edge : outgoingEdges(current)) {
+        if (!edgeTo.containsKey(edge.dest)) {
+          q.add(edge.dest);
+          edgeTo.put(edge.dest, current);
+        }
+      }
+    }
+    Stack<T> path = new Stack<T>();
+    while (!current.equals(startNode)) {
+      path.push(current);
+      current = edgeTo.get(current);
+    }
+    path.push(startNode);
+    ArrayList<T> reversedPath = new ArrayList<T>();
+    while(!path.isEmpty()) {
+      reversedPath.add(path.pop());
+    }
+    return reversedPath;
   }
   
-  public T dfs(T searchVal) {
-    return null;
+  // Return nodes searched before path from startNode to searchVal was found
+  public ArrayList<T> dfs(T startNode, T searchVal) {
+    if (!containsNode(searchVal)) {
+      throw new IllegalArgumentException("Cannot use dfs to search for a non-existent key");
+    }
+    ArrayList<T> reversedPath = new ArrayList<T>();
+    HashMap<T, T> edgeTo = new HashMap<T, T>();
+    Stack<T> stack = new Stack<T>();
+    stack.push(startNode);
+    T current = null;
+    while (!stack.isEmpty()) {
+      current = stack.pop();
+      if (current.equals(searchVal)) {
+        break;
+      }
+      for(Edge<T> edge : edges.get(current)) {
+        if (!edgeTo.containsKey(edge.dest)) {
+          stack.push(edge.dest);
+          edgeTo.put(edge.dest, current);
+        }
+      }
+    }
+    Stack<T> path = new Stack<T>();
+    while (!current.equals(startNode)) {
+      path.push(current);
+      current = edgeTo.get(current);
+    }
+    path.push(startNode);
+    reversedPath = new ArrayList<T>();
+    while(!path.isEmpty()) {
+      reversedPath.add(path.pop());
+    }
+    return reversedPath;
   }
 }
