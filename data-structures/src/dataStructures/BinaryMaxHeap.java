@@ -6,7 +6,7 @@ public class BinaryMaxHeap<T extends Comparable<T>> {
   
   @SuppressWarnings("unchecked")
   public BinaryMaxHeap(int size) {
-    this.size = size;
+    this.size = 0;
     this.arr = (T[]) new Comparable[size + 1];
   }
   

@@ -1,6 +1,7 @@
 package algorithms;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import dataStructures.Graph;
 
@@ -47,5 +48,53 @@ public class GraphClient {
     System.out.println("dfs path from grape to banana: ");
     System.out.println("expected: [grape, apple, banana]");
     System.out.println("actual: " + dfsStringPath.toString());
+    
+    HashMap<Integer, Integer> intPaths = new HashMap<Integer, Integer>();
+    HashMap<String, String> stringPaths = new HashMap<String, String>();
+    HashMap<Integer, Integer> intCosts = new HashMap<Integer, Integer>();
+    HashMap<String, Integer> stringCosts = new HashMap<String, Integer>();
+
+    intGraph.dijkstras(2, intPaths, intCosts);
+    stringGraph.dijkstras("strawberry", stringPaths, stringCosts);
+
+    System.out.println("expected int dijkstras paths for 3:");
+    System.out.println("resulting int dijkstras paths for 3:");
+    printIntIntMap(intPaths);
+    System.out.println("expected int dijkstras costs for 3:");
+    System.out.println("resulting int dijkstras costs for 3:");
+    printIntIntMap(intCosts);
+    System.out.println("expected string dijkstras paths for strawberry:");
+    System.out.println("resulting string dijkstras paths for strawberry:");
+    printStringStringMap(stringPaths);
+    System.out.println("expected string dijkstras costs for strawberry:");
+    System.out.println("resulting string dijkstras costs for strawberry:");
+    printStringIntMap(stringCosts);
   }
+  
+  public static void printIntIntMap(HashMap<Integer, Integer> pathMap) {
+    System.out.println("{");
+    for (Integer key : pathMap.keySet()) {
+      Integer res = pathMap.get(key);
+      System.out.println(key + " -> " + ((key == null) ? "[]" : res));
+    }
+    System.out.println("}");
+  }
+  
+  public static void printStringIntMap(HashMap<String, Integer> pathMap) {
+    System.out.println("{");
+    for (String key : pathMap.keySet()) {
+      Integer res = pathMap.get(key);
+      System.out.println(key + " -> " + ((key == null) ? "[]" : res));
+    }
+    System.out.println("}");
+  }
+  
+  public static void printStringStringMap(HashMap<String, String> pathMap) {
+    System.out.println("{");
+    for (String key : pathMap.keySet()) {
+      String res = pathMap.get(key);
+      System.out.println(key + " -> " + ((key == null) ? "[]" : res));
+    }
+    System.out.println("}");
+  } 
 }

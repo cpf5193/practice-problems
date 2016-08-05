@@ -1,12 +1,13 @@
 package dataStructures;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Graph<T> {
+public class Graph<T extends Comparable<T>> {
   
   /*
    * A graph is represented by a map of nodes to edges. Values of nodes must be unique.
@@ -155,5 +156,30 @@ public class Graph<T> {
       reversedPath.add(path.pop());
     }
     return reversedPath;
+  }
+  
+  // DOESN'T WORK YET
+  public void dijkstras(T source, HashMap<T, T> paths, HashMap<T, Integer> costs) {
+    PriorityMinQueue<T> priorityQueue = new PriorityMinQueue<T>();
+    for(T node : edges.keySet()) {
+      paths.put(node, null);
+      costs.put(node, Integer.MAX_VALUE);
+      priorityQueue.insert(node, Integer.MAX_VALUE);
+    }
+    priorityQueue.decreasePriority(source, 0);
+    PQNode<T> current = null;
+    while(!priorityQueue.isEmpty()) {
+      current = priorityQueue.removeMin();
+      for(Edge<T> edge : outgoingEdges(current.key)) {
+        int newWeight = current.priority + edge.weight;
+        if (newWeight < costs.get(edge.dest)) {
+          costs.put(edge.dest, newWeight);
+          paths.put(edge.dest, current.key);
+          if (!priorityQueue.isEmpty() && priorityQueue.containsKey(edge.dest)) {
+            priorityQueue.decreasePriority(edge.dest, newWeight);
+          }
+        }
+      }
+    }
   }
 }
