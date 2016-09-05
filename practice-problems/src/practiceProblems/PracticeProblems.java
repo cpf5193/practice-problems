@@ -115,4 +115,24 @@ public class PracticeProblems {
       }
     }
   }
+  
+  public int removeDuplicates(int[] nums) {
+    if (nums.length < 2) {
+        return nums.length;
+    }
+    int i = 1, j = 1, curr = 0;
+    while (j < nums.length) {
+        while(nums[j] == nums[curr]) {
+            j++;
+            if (j == nums.length) {
+                return i;
+            }
+        }
+        nums[i] = nums[j];
+        i++;
+        curr++;
+        j++;
+    }
+    return i;
+}
 }

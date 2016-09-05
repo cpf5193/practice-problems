@@ -93,5 +93,49 @@ public class PracticeProblemsTest {
     
     assertArrayEquals(results, expected);
   }
+  
+  @Test
+  public void testRemoveDuplicates() {
+    PracticeProblems pp = new PracticeProblems();
+    int[][] inputs = {
+        {},
+        {1},
+        {1, 2},
+        {1, 1},
+        {1, 2, 3, 4, 4},
+        {1, 2, 2, 3, 4, 4, 4, 8},
+        {-1, 0, 0, 0, 0, 3, 3}
+    };
+    
+    
+    int[] expectedLengths = {0, 1, 2, 1, 4, 5, 3};
+    int[] resultLengths = new int[inputs.length];
+    for(int i=0; i<inputs.length; i++) {
+      resultLengths[i] = pp.removeDuplicates(inputs[i]);
+    }
+    assertArrayEquals(expectedLengths, resultLengths);
+    
+    int[][] expectedArrays = {
+        {},
+        {1},
+        {1, 2},
+        {1},
+        {1, 2, 3, 4},
+        {1, 2, 3, 4, 8},
+        {-1, 0, 3}
+    };
+    
+    int[][] resultArrays = new int[inputs.length][];
+    for(int i=0; i<resultArrays.length; i++) {
+      resultArrays[i] = new int[expectedArrays[i].length];
+      for(int j=0; j<resultLengths[i]; j++) {
+        resultArrays[i][j] = inputs[i][j];
+      }
+    }
+    
+    for(int i=0; i<resultArrays.length; i++) {
+      assertArrayEquals(resultArrays[i], expectedArrays[i]);
+    }
+  }
 
 }
