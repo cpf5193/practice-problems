@@ -137,5 +137,17 @@ public class PracticeProblemsTest {
       assertArrayEquals(resultArrays[i], expectedArrays[i]);
     }
   }
+  
+  @Test
+  public void testFindTheDifference() {
+    PracticeProblems pp = new PracticeProblems();
+    String testInput1s = "aebcd";
+    String testInput1t = "abeccd";
+    char[] expected = {'c'};
+    char[] results = {
+        pp.findTheDifference(testInput1s, testInput1t)
+    };
+    assertArrayEquals(expected, results);
+  }
 
 }

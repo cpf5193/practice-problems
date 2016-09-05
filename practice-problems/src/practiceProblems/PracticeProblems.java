@@ -134,5 +134,23 @@ public class PracticeProblems {
         j++;
     }
     return i;
-}
+  }
+  
+  public char findTheDifference(String s, String t) {
+    HashMap<Character, Integer> letterCounts = new HashMap<Character, Integer>();
+    char c;
+    for(int i=0; i<s.length(); i++) {
+        c = s.charAt(i);
+        letterCounts.put(c, letterCounts.containsKey(c) ? letterCounts.get(c) + 1 : 1);
+    }
+    
+    for(int i=0; i<t.length(); i++) {
+        c = t.charAt(i);
+        if (!letterCounts.containsKey(c) || letterCounts.get(c) == 0) {
+            return c;
+        }
+        letterCounts.put(c, letterCounts.get(c) - 1);
+    }
+    return 'a';
+  }
 }
