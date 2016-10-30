@@ -153,4 +153,41 @@ public class PracticeProblems {
     }
     return 'a';
   }
+  
+  private boolean isOutOfBounds(int i, int j) {
+    return i > j || i < 0 || j < 0;
+  }
+  
+  private PalInfo fillCells(int i, int j, String s, PalInfo[][] grid) {
+      if (isOutOfBounds(i, j))
+          return null;
+      if (i == j) {
+          grid[i][j] = new PalInfo(i, j, true);
+          return grid[i][j];
+      }
+      PalInfo bottomPalInfo = grid[i+1][j];
+      PalInfo leftPalInfo = grid[i][j-1];
+      PalInfo bottomLeftPalInfo = (isOutOfBounds(i + 1, j - 1) ? new PalInfo(0, -1, true) : grid[i+1][j-1]);
+      bottomPalInfo = bottomPalInfo == null ? fillCells(i + 1, j, s, grid) : bottomPalInfo;
+      leftPalInfo = leftPalInfo == null ? fillCells(i, j - 1, s, grid) : leftPalInfo;
+      bottomLeftPalInfo = bottomLeftPalInfo == null ? fillCells(i - 1, j - 1, s, grid) : bottomLeftPalInfo;
+      int bottomLeftVal = bottomLeftPalInfo.getLength();
+      if (s.charAt(i) == s.charAt(j) && (bottomLeftPalInfo.isPalindrome)) {
+          bottomLeftVal += 2;
+      }
+      int maxOfLeftAndBottom = Math.max(leftPalInfo.getLength(), bottomPalInfo.getLength());
+      if (maxOfLeftAndBottom > bottomLeftVal) {
+          PalInfo maxInfo = bottomPalInfo.getLength() > leftPalInfo.getLength() ? bottomPalInfo : leftPalInfo;
+          grid[i][j] = new PalInfo(maxInfo.minIndex, maxInfo.maxIndex, false);
+      } else {
+          grid[i][j] = new PalInfo(i, j, true);
+      }
+      return grid[i][j];
+  }
+  
+  public String longestPalindrome(String s) {
+	PalInfo[][] palInfoGrid = new PalInfo[s.length()][s.length()];
+    PalInfo largestPalInfo = fillCells(0, s.length() - 1, s, palInfoGrid);
+	return s.substring(largestPalInfo.minIndex, largestPalInfo.maxIndex + 1);
+  }
 }

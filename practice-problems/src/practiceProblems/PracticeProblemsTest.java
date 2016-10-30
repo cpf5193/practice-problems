@@ -149,5 +149,17 @@ public class PracticeProblemsTest {
     };
     assertArrayEquals(expected, results);
   }
+  
+  @Test
+  public void testLongestPalindrome() {
+	PracticeProblems pp = new PracticeProblems();
+	String[] testInputs = {"a", "bb", "bc", "bab", "dabbacad", "cbabbad"};
+	String[] expected = {"a", "bb", "b", "bab", "abba", "abba"};
+	String[] results = new String[testInputs.length];
+	for ( int i = 0; i < results.length; i++) {
+		results[i] = pp.longestPalindrome(testInputs[i]);
+	}
+	assertArrayEquals(expected, results);
+  }
 
 }

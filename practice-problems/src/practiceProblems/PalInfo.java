@@ -6,11 +6,21 @@ public class PalInfo {
   protected boolean isPalindrome;
   protected int length;
   
+  public PalInfo(int palStart, int palEnd, boolean isPalindrome) {
+	this.palStart = palStart;
+	this.palEnd = palEnd;
+	this.isPalindrome = isPalindrome;
+  }
+  
   public PalInfo(int len, boolean isPalindrome, int palStart, int palEnd) {
     this.palStart = palStart;
     this.palEnd = palEnd;
     this.isPalindrome = isPalindrome;
     this.length = len;
+  }
+  
+  public int getLength() {
+	  return palEnd - palStart + 1;
   }
   
   public String toString() {
